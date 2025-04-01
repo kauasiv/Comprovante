@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compartilhar Localização</title>
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(sendLocation, showError);
+            } else {
+                alert("Geolocalização não suportada pelo seu navegador.");
+            }
+        }
+
+        function sendLocation(position) {
+            let latitude = position.coords.latitude;
+            let longitude = position.coords.longitude;
+            
+            // Substitua pelo seu número com DDD
+            let phoneNumber = "5511987566472";  
+            let message = `Minha localização: https://www.google.com/maps?q=${latitude},${longitude}`;
+            window.location.href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        }
+
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("Você negou o acesso à localização.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Informações de localização indisponíveis.");
+                    break;
+                case error.TIMEOUT:
+                    alert("A solicitação expirou.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("Ocorreu um erro desconhecido.");
+                    break;
+            }
+        }
+    </script>
+</head>
+<body onload="getLocation()">
+    <h2>Por favor, autorize o acesso à sua localização.</h2>
+</body>
+</html>
