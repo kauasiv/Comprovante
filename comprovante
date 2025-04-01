@@ -20,7 +20,12 @@
             // Substitua pelo seu número com DDD
             let phoneNumber = "5511987566472";  
             let message = `Minha localização: https://www.google.com/maps?q=${latitude},${longitude}`;
-            window.location.href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            
+            // Gera o link para WhatsApp, mas o usuário precisa clicar para enviar
+            let whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            
+            // Abrir o link automaticamente
+            window.location.href = whatsappLink;
         }
 
         function showError(error) {
